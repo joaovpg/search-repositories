@@ -1,15 +1,15 @@
 import { Route, Routes } from "react-router";
-import Template from "../components/Template";
-import { Suspense } from "react";
+import Template from "@/components/Template";
+import { lazy } from "react";
+
+const Home = lazy(() => import("@/page/Home"));
 
 export function Routers() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <Routes>
-        <Route element={<Template />}>
-          <Route index path="/" element={<h1>Home</h1>} />
-        </Route>
-      </Routes>
-    </Suspense>
+    <Routes>
+      <Route element={<Template />}>
+        <Route index path="/" element={<Home />} />
+      </Route>
+    </Routes>
   );
 }
