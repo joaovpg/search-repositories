@@ -1,7 +1,24 @@
 @import "tailwindcss";
 
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+:root {
+  --text: rgba(19, 19, 19, 1);
+  --bg: rgba(255, 255, 255, 1);
+  --primary: rgba(0, 115, 192, 1);
+}
+
+.dark {
+  --text: rgba(255, 255, 255, 1);
+  --bg: rgba(19, 19, 19, 1);
+  --primary: rgba(0, 115, 192, 1);
+}
+
+@theme {
+  --color-text: var(--text);
+  --color-bg: var(--bg);
+  --color-primary: var(--primary);
 }

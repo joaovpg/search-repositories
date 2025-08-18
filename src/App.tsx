@@ -1,5 +1,12 @@
+import { BrowserRouter } from "react-router";
+import { Routers } from "./Routers";
+
 function App() {
-  return <h1>Olá mundo</h1>;
+  return (
+    <BrowserRouter>
+      <Routers />
+    </BrowserRouter>
+  );
 }
 
 export default App;
