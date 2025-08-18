@@ -23,7 +23,6 @@ function ThemeSelector() {
   const { setTheme, theme } = useThemeStore();
 
   useLayoutEffect(() => {
-    console.log(theme);
     document.documentElement.classList.toggle(
       "dark",
       theme === "dark" ||
