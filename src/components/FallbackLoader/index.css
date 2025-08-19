@@ -1,0 +1,36 @@
+.loader {
+  display: inline-grid;
+  padding: 5px;
+}
+.loader:before,
+.loader:after {
+  content: "";
+  grid-area: 1/1;
+  height: 40px;
+  aspect-ratio: 3;
+  --c: rgba(0, 115, 192, 0) 64%, rgba(0, 115, 192, 1) 66% 98%,
+    rgba(0, 115, 192, 0) 101%;
+  background: radial-gradient(35% 146% at 50% 159%, var(--c)) 0 0,
+    radial-gradient(35% 146% at 50% -59%, var(--c)) 100% 100%;
+  background-size: calc(200% / 3) 50%;
+  background-repeat: repeat-x;
+}
+.loader:before {
+  -webkit-mask: repeating-linear-gradient(
+    90deg,
+    rgba(0, 115, 192, 1) 0 8%,
+    rgba(0, 115, 192, 0) 0 15%
+  );
+}
+.loader:after {
+  clip-path: inset(0 100% 0 0);
+  animation: l13 1.5s infinite linear;
+}
+@keyframes l13 {
+  50% {
+    clip-path: inset(0);
+  }
+  to {
+    clip-path: inset(0 0 0 100%);
+  }
+}
