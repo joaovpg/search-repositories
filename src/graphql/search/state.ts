@@ -1,3 +1,3 @@
 import { makeVar } from "@apollo/client";
 
-export const searchUserQuery = makeVar<string>("");
+export const queryVar = makeVar<string>("");

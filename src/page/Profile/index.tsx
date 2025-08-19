@@ -1,44 +1,58 @@
 import Combobox from "@/components/UI/Combobox";
 import Card from "@/components/UI/Card";
-import { Link } from "react-router";
+import { Link, useParams } from "react-router";
 
 //icons
 import AtIcon from "@/assets/Icons/Email.svg?react";
 import StarIcon from "@/assets/Icons/Star.svg?react";
 import PeopleIcon from "@/assets/Icons/People.svg?react";
+import { useEffect } from "react";
+import { useGetUser } from "@/graphql/user/hooks";
+import { userVar } from "@/graphql/user/state";
+import FallbackLoader from "@/components/FallbackLoader";
 
 function Profile() {
+  const { username } = useParams<{ username: string }>();
+  const { data, loading } = useGetUser();
+
+  useEffect(() => {
+    if (!username) return;
+    userVar(username);
+  }, [username]);
+
+  if (loading) {
+    return <FallbackLoader />;
+  }
+
   return (
     <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
       <aside className="p-6 flex flex-col gap-4">
         <img
           className="w-full object-cover rounded-full"
-          src="https://thispersondoesnotexist.com/"
+          src={data?.user.avatarUrl}
           alt="Foto do perfil do usuário do Github"
         />
         <div className="flex flex-col gap-1">
-          <h3 className="font-bold text-2xl">João Victor</h3>
-          <p className="text-lg text-text/70">joaovpg</p>
+          <h3 className="font-bold text-2xl">{data?.user.name}</h3>
+          <p className="text-lg text-text/70">{data?.user.login}</p>
         </div>
-        <p>
-          Desenvolvedor de software com três anos de experiência, atuando no
-          desenvolvimento de aplicações web com React e de aplicações mobile com
-          React Native.
-        </p>
+        <p>{data?.user.bio}</p>
         <div className="flex gap-2 text-text/70">
           <div className="flex gap-2  items-center" title="Seguidores">
             <PeopleIcon />
-            <span>722</span>
+            <span>{data?.user.followers.totalCount}</span>
           </div>
           <div className="flex gap-2  items-center" title="Seguindo">
             <PeopleIcon />
-            <span>722</span>
+            <span>{data?.user.following.totalCount}</span>
           </div>
         </div>
-        <div className="flex gap-2  items-center text-text/70" title="E-mail">
-          <AtIcon />
-          <span>email@email.com</span>
-        </div>
+        {data?.user.email && (
+          <div className="flex gap-2  items-center text-text/70" title="E-mail">
+            <AtIcon />
+            <span>{data.user.email}</span>
+          </div>
+        )}
       </aside>
       <div className="col-span-2">
         <div className="flex flex-col gap-2 py-4">

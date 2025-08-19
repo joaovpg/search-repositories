@@ -6,7 +6,7 @@ import BookIcon from "@/assets/Icons/Book.svg?react";
 import PeopleIcon from "@/assets/Icons/People.svg?react";
 import { useEffect, useMemo } from "react";
 import { useSearchUsers } from "@/graphql/search/hooks";
-import { searchUserQuery } from "@/graphql/search/state";
+import { queryVar } from "@/graphql/search/state";
 import FallbackLoader from "@/components/FallbackLoader";
 
 function Search() {
@@ -16,7 +16,7 @@ function Search() {
   const search = useMemo(() => searchParams.get("q") ?? "", [searchParams]);
 
   useEffect(() => {
-    searchUserQuery(search);
+    queryVar(search);
   }, [search]);
 
   if (loading) {
@@ -40,7 +40,7 @@ function Search() {
             },
           }) => (
             <Card key={id} className="flex-grow basis-xs">
-              <Link className="flex gap-2 p-4 h-full" to="/profile/joaovpg">
+              <Link className="flex gap-2 p-4 h-full" to={`/profile/${login}`}>
                 <img
                   className="size-12 object-cover rounded-full"
                   src={avatarUrl}
