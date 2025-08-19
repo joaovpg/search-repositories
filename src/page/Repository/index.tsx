@@ -86,8 +86,8 @@ function Repository() {
   }
 
   return (
-    <section className="flex-grow flex flex-col md:flex-row gap-6 items-center justify-center">
-      <Card className="w-full md:max-w-[410px] basis-4xs">
+    <section className="flex-grow flex flex-col md:flex-row gap-6 items-start justify-center relative">
+      <Card className="w-full md:max-w-[410px] basis-4xs md:sticky top-4">
         <div className="p-4 flex flex-col gap-4">
           <div>
             <h1 className="text-2xl font-bold text-primary hover:decoration-2 hover:underline">

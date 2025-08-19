@@ -17,14 +17,16 @@ export const GET_USER = gql`
       repositories(
         orderBy: { field: STARGAZERS, direction: DESC }
         first: 100
+        privacy: PUBLIC
+        ownerAffiliations: OWNER
       ) {
         nodes {
           stargazerCount
           name
           description
           url
-          id
           updatedAt
+          id
           languages(first: 1, orderBy: { field: SIZE, direction: DESC }) {
             nodes {
               color
