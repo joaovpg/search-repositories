@@ -1,11 +1,14 @@
 //icons
 import SearchIcon from "@/assets/Icons/Search.svg?react";
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 
 function SearchUsers() {
   const [isActive, setIsActive] = useState<boolean>(false);
+
   const [query, setQuery] = useState<string>("");
+  const [searchParams] = useSearchParams();
+  const search = searchParams.get("q");
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -45,7 +48,7 @@ function SearchUsers() {
       >
         <SearchIcon className="text-text/60" />
         <span className="hidden md:block text-text/60">
-          Digite o nome do usuário
+          {search ?? "Digite o nome do usuário"}
         </span>
       </button>
       {isActive && (
