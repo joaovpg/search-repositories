@@ -20,6 +20,7 @@ function SearchUsers() {
     if (event && event?.key !== "Enter") return;
     event?.preventDefault();
     navigate(`/search?q=${query}`);
+    setIsActive(false);
   };
 
   const handleBlur = () => {

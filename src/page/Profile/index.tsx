@@ -1,15 +1,16 @@
-import Combobox from "@/components/UI/Combobox";
-import Card from "@/components/UI/Card";
-import { Link, useParams } from "react-router";
-
 //icons
 import AtIcon from "@/assets/Icons/Email.svg?react";
 import StarIcon from "@/assets/Icons/Star.svg?react";
 import PeopleIcon from "@/assets/Icons/People.svg?react";
+
+import Combobox from "@/components/UI/Combobox";
+import Card from "@/components/UI/Card";
+import { Link, useParams } from "react-router";
 import { useEffect } from "react";
 import { useGetUser } from "@/graphql/user/hooks";
 import { userVar } from "@/graphql/user/state";
 import FallbackLoader from "@/components/FallbackLoader";
+import { dateFormat } from "@/utils";
 
 function Profile() {
   const { username } = useParams<{ username: string }>();
@@ -76,40 +77,54 @@ function Profile() {
             </Combobox>
           </div>
           <div className="flex flex-wrap gap-4">
-            {Array.from({ length: 30 }).map((_, index = 0) => (
-              <Card key={index} className="flex-grow basis-xs">
-                <Link
-                  to="repository/notepad_black"
-                  className="p-4 flex flex-col gap-2"
-                >
-                  <div className="flex justify-between">
-                    <h4 className="font-bold text-primary">notepad-black</h4>
-                    <span className="text-text/70">16/08/2025</span>
-                  </div>
-                  <p>
-                    A notepad developed by me to practice and learn the C
-                    language and its C ++ / C # variants, I was inspired by the
-                    dark mode of the windows.
-                  </p>
-                  <div className="flex flex-row gap-4">
-                    <div
-                      className="flex gap-2  items-center text-text/70"
-                      title="Linguagem mais utilizada"
-                    >
-                      <div className="size-5 bg-primary rounded-full" />
-                      React
+            {data?.user.repositories.nodes.map(
+              ({
+                id,
+                name,
+                updatedAt,
+                description,
+                languages,
+                stargazerCount,
+              }) => (
+                <Card key={id} className="flex-grow basis-xs">
+                  <Link
+                    to={`repository/${name}`}
+                    className="p-4 flex flex-col gap-2"
+                  >
+                    <div className="flex justify-between">
+                      <h4 className="font-bold text-primary">{name}</h4>
+                      <span className="text-text/70">
+                        {dateFormat.format(new Date(updatedAt))}
+                      </span>
                     </div>
-                    <div
-                      className="flex gap-2  items-center text-text/70"
-                      title="Estrelas"
-                    >
-                      <StarIcon />
-                      700
+                    {description && <p>{description}</p>}
+                    <div className="flex flex-row gap-4">
+                      {languages.nodes[0] && (
+                        <div
+                          className="flex gap-2 items-center text-text/70"
+                          title="Linguagem mais utilizada"
+                        >
+                          <div
+                            className="size-5 rounded-full"
+                            style={{
+                              backgroundColor: languages.nodes[0].color,
+                            }}
+                          />
+                          <span>{languages.nodes[0]?.name}</span>
+                        </div>
+                      )}
+                      <div
+                        className="flex gap-2  items-center text-text/70"
+                        title="Estrelas"
+                      >
+                        <StarIcon />
+                        <span>{stargazerCount}</span>
+                      </div>
                     </div>
-                  </div>
-                </Link>
-              </Card>
-            ))}
+                  </Link>
+                </Card>
+              )
+            )}
           </div>
         </div>
       </div>

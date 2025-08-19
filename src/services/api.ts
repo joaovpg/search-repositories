@@ -5,6 +5,7 @@ const api = axios.create({
   headers: {
     "Content-Type": "application/json",
     Accept: "application/vnd.github.v3+json",
+    Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`,
   },
 });
 
