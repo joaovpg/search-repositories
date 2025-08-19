@@ -5,6 +5,7 @@ import { lazy } from "react";
 const Home = lazy(() => import("@/page/Home"));
 const Search = lazy(() => import("@/page/Search"));
 const Profile = lazy(() => import("@/page/Profile"));
+const Repository = lazy(() => import("@/page/Repository"));
 
 export function Routers() {
   return (
@@ -12,7 +13,10 @@ export function Routers() {
       <Route element={<Template />}>
         <Route index path="/" element={<Home />} />
         <Route path="/search" element={<Search />} />
-        <Route path="/profile/:username" element={<Profile />} />
+        <Route path="/profile/:username">
+          <Route index element={<Profile />} />
+          <Route path="repository/:repository" element={<Repository />} />
+        </Route>
       </Route>
     </Routes>
   );

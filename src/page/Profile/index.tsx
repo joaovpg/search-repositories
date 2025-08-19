@@ -1,10 +1,11 @@
-import PeopleIcon from "@/assets/Icons/People.svg?react";
 import Combobox from "@/components/UI/Combobox";
 import Card from "@/components/UI/Card";
+import { Link } from "react-router";
 
 //icons
 import AtIcon from "@/assets/Icons/Email.svg?react";
 import StarIcon from "@/assets/Icons/Star.svg?react";
+import PeopleIcon from "@/assets/Icons/People.svg?react";
 
 function Profile() {
   return (
@@ -63,7 +64,10 @@ function Profile() {
           <div className="flex flex-wrap gap-4">
             {Array.from({ length: 30 }).map((_, index = 0) => (
               <Card key={index} className="flex-grow basis-xs">
-                <div className="p-4 flex flex-col gap-2">
+                <Link
+                  to="repository/notepad_black"
+                  className="p-4 flex flex-col gap-2"
+                >
                   <div className="flex justify-between">
                     <h4 className="font-bold text-primary">notepad-black</h4>
                     <span className="text-text/70">16/08/2025</span>
@@ -89,7 +93,7 @@ function Profile() {
                       700
                     </div>
                   </div>
-                </div>
+                </Link>
               </Card>
             ))}
           </div>
