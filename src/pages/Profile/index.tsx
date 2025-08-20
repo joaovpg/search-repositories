@@ -1,23 +1,15 @@
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { useGetUser } from "@/graphql/profile/hooks";
 import { userVar } from "@/graphql/profile/state";
 import FallbackLoader from "@/components/FallbackLoader";
 import RepositoryList from "./RepositoryList";
 import ProfileCard from "./ProfileCard";
 import NotFound from "../NotFound";
-import { userDetailsAdapter } from "@/graphql/profile/adapters";
 import { useParams } from "react-router";
 
 function Profile() {
   const { username } = useParams();
   const { data, loading, error } = useGetUser();
-
-  const userDetails = useMemo(() => {
-    if (data) {
-      return userDetailsAdapter(data);
-    }
-    return undefined;
-  }, [data]);
 
   useEffect(() => {
     if (!username) return;
@@ -28,19 +20,19 @@ function Profile() {
     return <FallbackLoader />;
   }
 
-  if (!userDetails || error) {
+  if (!data || error) {
     return <NotFound />;
   }
 
   return (
     <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
       <ProfileCard
-        name={userDetails.name}
-        login={userDetails.login}
-        bio={userDetails.bio}
-        avatarUrl={userDetails.avatarUrl}
-        followers={userDetails.followersCount}
-        following={userDetails.followingCount}
+        name={data.name}
+        login={data.login}
+        bio={data.bio}
+        avatarUrl={data.avatarUrl}
+        followers={data.followersCount}
+        following={data.followingCount}
       />
       <div className="col-span-2">
         <RepositoryList />

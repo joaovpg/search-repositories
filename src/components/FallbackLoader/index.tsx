@@ -1,8 +1,14 @@
 import "./index.css";
 
-function FallbackLoader() {
+interface FallbackLoaderProps {
+  className?: string;
+}
+
+function FallbackLoader({ className }: Readonly<FallbackLoaderProps>) {
   return (
-    <section className="flex justify-center items-center flex-grow">
+    <section
+      className={`flex justify-center items-center flex-grow ${className}`}
+    >
       <div className="loader" />
     </section>
   );
