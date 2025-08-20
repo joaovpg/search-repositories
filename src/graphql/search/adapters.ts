@@ -1,10 +1,10 @@
-import type { ISearch } from "@/interface/ISearch";
+import type { ISearchUser } from "@/interface/ISearch";
+import type { ISearchResponse } from "./types";
 
-export function searchUsersAdapter(response: ISearch) {
+export function searchUsersAdapter(response: ISearchResponse): ISearchUser[] {
   return response.search.edges
     .map(({ node }) => {
       try {
-        console.log(node);
         return {
           login: node.login,
           name: node.name ?? undefined,
@@ -19,5 +19,5 @@ export function searchUsersAdapter(response: ISearch) {
         return undefined;
       }
     })
-    .filter(Boolean);
+    .filter((item) => item !== undefined);
 }

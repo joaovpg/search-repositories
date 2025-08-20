@@ -1,13 +1,13 @@
 import { SEARCH_USERS } from "@/graphql/search/queries";
 import { useQuery, useReactiveVar } from "@apollo/client";
 import { queryVar } from "./state";
-import type { ISearch } from "@/interface/ISearch";
 import { searchUsersAdapter } from "./adapters";
+import type { ISearchResponse } from "./types";
 
 export const useSearchUsers = () => {
   const query = useReactiveVar(queryVar);
 
-  const queryResults = useQuery<ISearch>(SEARCH_USERS, {
+  const queryResults = useQuery<ISearchResponse>(SEARCH_USERS, {
     variables: { query: query },
   });
 

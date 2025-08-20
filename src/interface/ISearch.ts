@@ -1,30 +1,10 @@
-export interface ISearch {
-  search: Search;
-}
-
-interface Search {
-  __typename: string;
-  edges: Edge[];
-}
-
-interface Edge {
-  __typename: string;
-  node: Node;
-}
-
-interface Node {
-  __typename: string;
+export interface ISearchUser {
   login: string;
-  name: null | string;
+  name?: string;
   id: string;
-  bio: null | string;
+  bio?: string;
   avatarUrl: string;
-  location: null | string;
-  followers: TotalCount;
-  repositories: TotalCount;
-}
-
-interface TotalCount {
-  __typename: string;
-  totalCount: number;
+  location?: string;
+  followersCount: number;
+  repositoriesCount: number;
 }

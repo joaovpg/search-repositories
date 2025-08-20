@@ -1,6 +1,7 @@
 import { formatDate } from "@/utils";
 import type { IRepository } from "@/interface/IRepository";
-import type { IUserDetails, IUserResponse } from "@/interface/IUser";
+import type { IUserDetails } from "@/interface/IUser";
+import type { IUserResponse } from "./types";
 
 export const repositoryAdapter = (response: IUserResponse): IRepository[] => {
   return response.user.repositories.nodes.map(

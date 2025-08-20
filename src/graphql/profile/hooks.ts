@@ -1,8 +1,7 @@
 import { useQuery, useReactiveVar } from "@apollo/client";
 import { GET_REPOSITORIES, GET_USER } from "@/graphql/profile/queries";
 import { cursorVar, userVar } from "./state";
-import type { IUserResponse } from "@/interface/IUser";
-import type { RepositoryOrderBy } from "./types";
+import type { IUserResponse, RepositoryOrderBy } from "./types";
 import { repositoryAdapter, userDetailsAdapter } from "./adapters";
 
 export function useGetUser() {
