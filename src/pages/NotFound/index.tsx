@@ -3,7 +3,10 @@ import Chopin from "@/assets/Images/Chopin.png";
 
 function NotFound() {
   return (
-    <section className="flex-grow flex items-center justify-center">
+    <section
+      className="flex-grow flex items-center justify-center"
+      data-testid="not-found"
+    >
       <div className="max-w-[500px] flex flex-col gap-6 items-center">
         <img
           alt="Chopin, o gato."
