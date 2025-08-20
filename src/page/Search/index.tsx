@@ -1,14 +1,10 @@
-import Card from "@/components/UI/Card";
-import { Link, useSearchParams } from "react-router";
-
-//icons
-import BookIcon from "@/assets/Icons/Book.svg?react";
-import PeopleIcon from "@/assets/Icons/People.svg?react";
+import { useSearchParams } from "react-router";
 import { useEffect, useMemo } from "react";
 import { useSearchUsers } from "@/graphql/search/hooks";
 import { queryVar } from "@/graphql/search/state";
 import FallbackLoader from "@/components/FallbackLoader";
 import { searchUsersAdapter } from "@/graphql/search/adapters";
+import CardUser from "./CardUser";
 
 function Search() {
   const [searchParams] = useSearchParams();
@@ -27,6 +23,21 @@ function Search() {
     queryVar(search);
   }, [search]);
 
+  if (!search) {
+    return (
+      <section className="flex flex-col items-center justify-center flex-grow">
+        <h1 className="text-5xl md:text-6xl max-w-[1000px] leading-14 font-black text-center mb-4">
+          Encontre usuários do GitHub rapidamente.
+          <br />
+        </h1>
+        <p className="linear-animate text-4xl md:text-5xl text-center">
+          Digite um nome ou login para começar a busca e explorar perfis
+          públicos.
+        </p>
+      </section>
+    );
+  }
+
   if (loading) {
     return <FallbackLoader />;
   }
@@ -34,46 +45,26 @@ function Search() {
   return (
     <section>
       <div className="flex gap-6 flex-wrap">
-        {userList.map((user) => (
-          <Card key={user?.id} className="flex-grow basis-xs">
-            <Link
-              className="flex gap-2 p-4 h-full"
-              to={`/profile/${user?.login}`}
-            >
-              <img
-                className="size-12 object-cover rounded-full"
-                src={user?.avatarUrl}
-                alt="Foto do perfil do usuário do Github"
-              />
-              <div className="flex flex-col gap-2">
-                <p className="font-bold text-primary">
-                  {user?.name}{" "}
-                  <span className="font-normal text-text/70">
-                    {!!user?.name && "· "}
-                    {user?.login}
-                  </span>
-                </p>
-                <p className="text-wrap whitespace-wrap break-all">
-                  {user?.bio}
-                </p>
-                <div className="text-sm text-text/70 flex items-center gap-2">
-                  <p>{user?.location}</p>
-                  <div
-                    className="flex gap-2  items-center"
-                    title="Repositórios"
-                  >
-                    <BookIcon />
-                    <span>{user?.repositoriesCount}</span>
-                  </div>
-                  <div className="flex gap-2 items-center" title="Seguidores">
-                    <PeopleIcon />
-                    <span>{user?.followersCount}</span>
-                  </div>
-                </div>
-              </div>
-            </Link>
-          </Card>
-        ))}
+        {userList.length === 0 ? (
+          <p className="text-center text-text/70 flex-grow text-2xl">
+            Nenhum usuário encontrado para a busca:
+            <br />
+            <span className="font-bold">{search}</span>
+          </p>
+        ) : (
+          userList.map((user) => (
+            <CardUser
+              key={user?.id}
+              avatarUrl={user?.avatarUrl}
+              followersCount={user?.followersCount}
+              login={user?.login}
+              repositoriesCount={user?.repositoriesCount}
+              bio={user?.bio}
+              location={user?.location}
+              name={user?.name}
+            />
+          ))
+        )}
       </div>
     </section>
   );

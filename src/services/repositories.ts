@@ -1,4 +1,4 @@
-import type { IRepository } from "@/interface/IRepository";
+import type { IRepositoryDetails } from "@/interface/IRepository";
 import api from "./api";
 import type { ILanguage } from "@/interface/ILanguage";
 
@@ -8,9 +8,12 @@ export async function getRepository(
   repository: string,
   params = {}
 ) {
-  return await api.get<IRepository>(`${BASE_URL}/${username}/${repository}`, {
-    params,
-  });
+  return await api.get<IRepositoryDetails>(
+    `${BASE_URL}/${username}/${repository}`,
+    {
+      params,
+    }
+  );
 }
 
 export async function getRepositoryLanguages(

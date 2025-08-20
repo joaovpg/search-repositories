@@ -9,15 +9,16 @@ import {
   getRepositoryLanguages,
   getRepositoryReadme,
 } from "@/services/repositories";
-import type { IRepository } from "@/interface/IRepository";
+import type { IRepositoryDetails } from "@/interface/IRepository";
 import type { ILanguage } from "@/interface/ILanguage";
 import Markdown from "@/components/Markdown";
 import FallbackLoader from "@/components/FallbackLoader";
 import { formatDate } from "@/utils";
 import { useAppParams } from "@/hooks/useAppParams";
+import NotFound from "../NotFound";
 
 function Repository() {
-  const [repository, setRepository] = useState<IRepository>();
+  const [repository, setRepository] = useState<IRepositoryDetails>();
   const [languages, setLanguages] = useState<ILanguage>();
   const [markdown, setMarkdown] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -79,7 +80,7 @@ function Repository() {
   }
 
   if (!repository) {
-    return <h1>Repositório não encontrado</h1>;
+    return <NotFound />;
   }
 
   return (
