@@ -1,5 +1,5 @@
 import { useSearchParams } from "react-router";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useSearchUsers } from "@/graphql/search/hooks";
 import { queryVar } from "@/graphql/search/state";
 import FallbackLoader from "@/components/FallbackLoader";
@@ -9,7 +9,10 @@ function Search() {
   const [searchParams] = useSearchParams();
   const { data, loading } = useSearchUsers();
   const search = useMemo(() => searchParams.get("q") ?? "", [searchParams]);
-  queryVar(search);
+
+  useEffect(() => {
+    queryVar(search);
+  }, [search]);
 
   if (!search) {
     return (
