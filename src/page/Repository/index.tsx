@@ -9,22 +9,19 @@ import {
   getRepositoryLanguages,
   getRepositoryReadme,
 } from "@/services/repositories";
-import { useParams } from "react-router";
 import type { IRepository } from "@/interface/IRepository";
-import { dateFormat } from "@/utils";
 import type { ILanguage } from "@/interface/ILanguage";
 import Markdown from "@/components/Markdown";
 import FallbackLoader from "@/components/FallbackLoader";
+import { formatDate } from "@/utils";
+import { useAppParams } from "@/hooks/useAppParams";
 
 function Repository() {
-  const params = useParams<{
-    username: string;
-    repository: string;
-  }>();
   const [repository, setRepository] = useState<IRepository>();
   const [languages, setLanguages] = useState<ILanguage>();
   const [markdown, setMarkdown] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const params = useAppParams();
 
   const repositoryLanguages = useMemo(() => {
     if (!languages) return [];
@@ -94,10 +91,7 @@ function Repository() {
               <a href={repository.html_url}>{repository.name}</a>
             </h1>
             <div className="flex flex-row items-center gap-3 text-text/70">
-              <span>
-                atualizado em{" "}
-                {dateFormat.format(new Date(repository.updated_at))}
-              </span>
+              <span>atualizado em {formatDate(repository.updated_at)}</span>
               <div
                 className="flex gap-2  items-center text-text/70"
                 title="Estrelas"
