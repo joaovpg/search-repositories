@@ -2,11 +2,11 @@ import { Route, Routes } from "react-router";
 import Template from "@/components/Template";
 import { lazy } from "react";
 
-const Home = lazy(() => import("@/page/Home"));
-const Search = lazy(() => import("@/page/Search"));
-const Profile = lazy(() => import("@/page/Profile"));
-const Repository = lazy(() => import("@/page/Repository"));
-const NotFound = lazy(() => import("@/page/NotFound"));
+const Home = lazy(() => import("@/pages/Home"));
+const Search = lazy(() => import("@/pages/Search"));
+const Profile = lazy(() => import("@/pages/Profile"));
+const Repository = lazy(() => import("@/pages/Repository"));
+const NotFound = lazy(() => import("@/pages/NotFound"));
 
 export function Routers() {
   return (
