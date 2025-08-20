@@ -14,26 +14,42 @@ export const GET_USER = gql`
         totalCount
       }
       email
+    }
+  }
+`;
+
+export const GET_REPOSITORIES = gql`
+  query getRepositories(
+    $login: String!
+    $orderBy: RepositoryOrder!
+    $cursor: String
+  ) {
+    user(login: $login) {
       repositories(
-        orderBy: { field: STARGAZERS, direction: DESC }
         first: 100
+        after: $cursor
+        orderBy: $orderBy
         privacy: PUBLIC
         ownerAffiliations: OWNER
       ) {
         nodes {
-          stargazerCount
+          id
           name
           description
           url
+          stargazerCount
           updatedAt
-          id
           languages(first: 1, orderBy: { field: SIZE, direction: DESC }) {
             nodes {
-              color
-              name
               id
+              name
+              color
             }
           }
+        }
+        pageInfo {
+          hasNextPage
+          endCursor
         }
       }
     }

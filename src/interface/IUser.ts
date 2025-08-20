@@ -14,35 +14,42 @@ interface User {
   repositories: Repositories;
 }
 
+interface Followers {
+  __typename: string;
+  totalCount: number;
+}
+
 interface Repositories {
   __typename: string;
   nodes: Repository[];
+  pageInfo: PageInfo;
+}
+
+interface PageInfo {
+  __typename: string;
+  hasNextPage: boolean;
+  endCursor: string;
 }
 
 interface Repository {
   __typename: string;
-  stargazerCount: number;
+  id: string;
   name: string;
-  updatedAt: string;
   description: null | string;
   url: string;
-  id: string;
+  stargazerCount: number;
+  updatedAt: string;
   languages: Languages;
 }
 
 interface Languages {
   __typename: string;
-  nodes: Node[];
+  nodes: Language[];
 }
 
-interface Node {
+interface Language {
   __typename: string;
-  color: string;
-  name: string;
   id: string;
-}
-
-interface Followers {
-  __typename: string;
-  totalCount: number;
+  name: string;
+  color: string;
 }
