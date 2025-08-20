@@ -1,9 +1,7 @@
-// Repository.test.tsx
 import { render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, test, vi } from "vitest";
 import Repository from "../index";
 
-// cria mock do hook
 vi.mock("../useFetchRepositoryData", () => ({
   useFetchRepositoryData: vi.fn(),
 }));
@@ -18,7 +16,7 @@ describe("<Repository />", () => {
     vi.clearAllMocks();
   });
 
-  test("renderiza loader quando isLoading é true", () => {
+  test("deve renderizar loader quando isLoading é true", () => {
     mockUseFetchRepositoryData.mockReturnValue({
       isLoading: true,
       isError: false,
@@ -36,7 +34,7 @@ describe("<Repository />", () => {
     expect(screen.getByTestId("fallback-loader")).toBeInTheDocument();
   });
 
-  test("renderiza NotFound quando ocorre erro", () => {
+  test("deve renderizar NotFound quando ocorre erro", () => {
     mockUseFetchRepositoryData.mockReturnValue({
       isLoading: false,
       isError: true,
@@ -54,7 +52,7 @@ describe("<Repository />", () => {
     expect(screen.getByTestId("not-found")).toBeInTheDocument();
   });
 
-  test("renderiza CardRepository e ReadmeNotFound quando markdown está vazio", () => {
+  test("deve renderizar CardRepository e ReadmeNotFound quando markdown está vazio", () => {
     mockUseFetchRepositoryData.mockReturnValue({
       isLoading: false,
       isError: false,
@@ -79,7 +77,7 @@ describe("<Repository />", () => {
     expect(screen.getByText(/readme não encontrado/i)).toBeInTheDocument();
   });
 
-  test("renderiza CardRepository e Markdown quando markdown está presente", () => {
+  test("deve renderizar CardRepository e Markdown quando markdown está presente", () => {
     mockUseFetchRepositoryData.mockReturnValue({
       isLoading: false,
       isError: false,

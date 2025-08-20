@@ -3,8 +3,6 @@ import { beforeEach, describe, expect, test, vi } from "vitest";
 import Search from "..";
 import { MemoryRouter } from "react-router";
 
-// mocks
-
 const mockUseSearchParams = vi.fn();
 vi.mock("react-router", async () => {
   const actual = await vi.importActual("react-router");
@@ -48,7 +46,7 @@ describe("Search", () => {
     mockUseSearchParams.mockReset();
   });
 
-  test("renderiza placeholder quando não há query", () => {
+  test("deve renderizar mensagem amigável quando não há query", () => {
     mockUseSearchParams.mockReturnValue([
       {
         get: () => "",
@@ -64,7 +62,7 @@ describe("Search", () => {
     expect(screen.getByTestId("query-empty-test")).toBeInTheDocument();
   });
 
-  test("renderiza lista de usuários quando há dados", () => {
+  test("deve renderizar lista de usuários quando há dados", () => {
     mockUseSearchParams.mockReturnValue([
       {
         get: () => "joao",
@@ -80,7 +78,7 @@ describe("Search", () => {
     expect(screen.getByText("joao")).toBeInTheDocument();
   });
 
-  test("renderiza mensagem de nenhum usuário encontrado", () => {
+  test("deve renderizar mensagem de nenhum usuário encontrado", () => {
     (useSearchUsers as unknown as ReturnType<typeof vi.fn>).mockReturnValue({
       data: [],
       loading: false,
@@ -97,7 +95,7 @@ describe("Search", () => {
     expect(screen.getByText(/Nenhum usuário encontrado/i)).toBeInTheDocument();
   });
 
-  test("renderiza loader quando loading", () => {
+  test("deve renderizar loader quando estiver carregando a requisição", () => {
     mockUseSearchParams.mockReturnValue([
       {
         get: () => "joao",
