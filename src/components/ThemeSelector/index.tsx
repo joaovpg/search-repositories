@@ -32,7 +32,11 @@ function ThemeSelector() {
   }, [theme]);
 
   return (
-    <Combobox onChange={(value) => setTheme(value as Theme)} value={theme}>
+    <Combobox
+      onChange={(value) => setTheme(value as Theme)}
+      value={theme}
+      title="Selecionar tema"
+    >
       <Combobox.Trigger>{Icon[theme]}</Combobox.Trigger>
 
       <Combobox.List>

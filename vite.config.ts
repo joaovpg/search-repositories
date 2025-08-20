@@ -8,7 +8,11 @@ import path from "path";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss(), svgr()],
-  test: {},
+  test: {
+    environment: "jsdom",
+    globals: true,
+    setupFiles: "./src/setupTests.ts",
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

@@ -26,7 +26,7 @@ function CardUser({
   name,
 }: Readonly<CardUserProps>) {
   return (
-    <Card className="flex-grow basis-xs">
+    <Card className="flex-grow basis-xs" data-testid="card-user">
       <Link className="flex gap-2 p-4 h-full" to={`/profile/${login}`}>
         <img
           className="size-12 object-cover rounded-full"

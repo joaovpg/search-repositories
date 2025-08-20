@@ -4,11 +4,12 @@ import Trigger from "./trigger";
 import List from "./list";
 import Option from "./option";
 
-type ComboboxProps = {
+export type ComboboxProps = {
   value?: string; // se vier, é controlled
   defaultValue?: string; // fallback quando uncontrolled
   onChange?: (value: string) => void;
   children: ReactNode;
+  title?: string;
 };
 
 function Combobox({
@@ -16,6 +17,7 @@ function Combobox({
   defaultValue,
   onChange,
   children,
+  title = "",
 }: Readonly<ComboboxProps>) {
   const [internalValue, setInternalValue] = useState(defaultValue ?? "");
   const [isOpen, setIsOpen] = useState(false);
@@ -52,7 +54,9 @@ function Combobox({
 
   return (
     <ComboboxContext.Provider value={contextValue}>
-      <div className="relative">{children}</div>
+      <div className="relative" title={title}>
+        {children}
+      </div>
     </ComboboxContext.Provider>
   );
 }

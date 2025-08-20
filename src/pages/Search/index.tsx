@@ -26,7 +26,10 @@ function Search() {
   if (!search) {
     return (
       <section className="flex flex-col items-center justify-center flex-grow">
-        <h1 className="text-5xl md:text-6xl max-w-[1000px] leading-14 font-black text-center mb-4">
+        <h1
+          className="text-5xl md:text-6xl max-w-[1000px] leading-14 font-black text-center mb-4"
+          data-testid="query-empty-test"
+        >
           Encontre usuários do GitHub rapidamente.
           <br />
         </h1>

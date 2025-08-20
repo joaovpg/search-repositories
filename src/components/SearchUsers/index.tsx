@@ -58,13 +58,14 @@ function SearchUsers() {
             <button
               className="p-2"
               onClick={() => handleSearch()}
-              title="Pesquisar usuários"
+              title="Enviar pesquisa"
             >
               <SearchIcon className="text-primary" />
             </button>
             <input
               ref={inputRef}
               title="Pesquisar usuários"
+              placeholder="Digite o nome do usuário ou login"
               className="flex-grow outline-none py-2 pr-2"
               onBlur={handleBlur}
               onKeyDown={handleSearch}
