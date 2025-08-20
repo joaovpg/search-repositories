@@ -27,7 +27,7 @@ function RepositoryCard({
   return (
     <Card className="flex-grow basis-xs">
       <Link to={`repository/${name}`} className="p-4 flex flex-col gap-2">
-        <div className="flex justify-between">
+        <div className="flex flex-col md:flex-row md:justify-between">
           <h4 className="font-bold text-primary">{name}</h4>
           <span className="text-text/70">{updatedAt}</span>
         </div>

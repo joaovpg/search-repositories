@@ -12,7 +12,7 @@ function Option({ value, children }: Readonly<OptionProps>) {
   return (
     <li>
       <button
-        className={`p-2 w-full hover:bg-text/10 rounded-lg cursor-pointer flex items-center gap-2 ${
+        className={`p-2 w-full hover:bg-text/10 rounded-lg text-start cursor-pointer flex items-center gap-2 ${
           active && "bg-text/10"
         }`}
         onClick={() => setSelected(value)}

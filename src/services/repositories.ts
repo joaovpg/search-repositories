@@ -30,7 +30,6 @@ export async function getRepositoryReadme(
   repository: string
 ) {
   return await api.get(`${BASE_URL}/${username}/${repository}/readme`, {
-    params: { ref: "main" },
     headers: { Accept: "application/vnd.github.v3.raw" },
   });
 }

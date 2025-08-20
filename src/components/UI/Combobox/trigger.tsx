@@ -8,7 +8,7 @@ function Trigger({ children }: Readonly<PropsWithChildren>) {
   const { toggleOpen } = useComboboxContext();
   return (
     <button
-      className="flex items-center p-2 focus:outline-1 focus:outline-text/10 rounded-lg"
+      className="flex items-center text-start gap-2 p-2 focus:outline-1 focus:outline-text/10 rounded-lg"
       onClick={toggleOpen}
     >
       {children}
