@@ -1,6 +1,7 @@
 //icons
 import BookIcon from "@/assets/Icons/Book.svg?react";
 import PeopleIcon from "@/assets/Icons/People.svg?react";
+import TextIcon from "@/components/TextIcon";
 
 import Card from "@/components/UI/Card";
 import { Link } from "react-router";
@@ -43,14 +44,12 @@ function CardUser({
           <p className="text-wrap whitespace-wrap break-all">{bio}</p>
           <div className="text-sm text-text/70 flex items-center gap-2">
             <p>{location}</p>
-            <div className="flex gap-2  items-center" title="Repositórios">
-              <BookIcon />
-              <span>{repositoriesCount}</span>
-            </div>
-            <div className="flex gap-2 items-center" title="Seguidores">
-              <PeopleIcon />
-              <span>{followersCount}</span>
-            </div>
+            <TextIcon title="Total de repositórios" icon={<BookIcon />}>
+              {repositoriesCount}
+            </TextIcon>
+            <TextIcon title="Total de seguidores" icon={<PeopleIcon />}>
+              {followersCount}
+            </TextIcon>
           </div>
         </div>
       </Link>
