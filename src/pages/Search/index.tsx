@@ -1,27 +1,15 @@
 import { useSearchParams } from "react-router";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { useSearchUsers } from "@/graphql/search/hooks";
 import { queryVar } from "@/graphql/search/state";
 import FallbackLoader from "@/components/FallbackLoader";
-import { searchUsersAdapter } from "@/graphql/search/adapters";
 import CardUser from "./CardUser";
 
 function Search() {
   const [searchParams] = useSearchParams();
   const { data, loading } = useSearchUsers();
-
   const search = useMemo(() => searchParams.get("q") ?? "", [searchParams]);
-
-  const userList = useMemo(() => {
-    if (data) {
-      return searchUsersAdapter(data);
-    }
-    return [];
-  }, [data]);
-
-  useEffect(() => {
-    queryVar(search);
-  }, [search]);
+  queryVar(search);
 
   if (!search) {
     return (
@@ -48,14 +36,14 @@ function Search() {
   return (
     <section>
       <div className="flex gap-6 flex-wrap">
-        {userList.length === 0 ? (
+        {data.length === 0 ? (
           <p className="text-center text-text/70 flex-grow text-2xl">
             Nenhum usuário encontrado para a busca:
             <br />
             <span className="font-bold">{search}</span>
           </p>
         ) : (
-          userList.map((user) => (
+          data.map((user) => (
             <CardUser
               key={user?.id}
               avatarUrl={user?.avatarUrl}
