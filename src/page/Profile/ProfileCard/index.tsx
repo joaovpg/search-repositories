@@ -1,6 +1,7 @@
 //icons
 import AtIcon from "@/assets/Icons/Email.svg?react";
 import PeopleIcon from "@/assets/Icons/People.svg?react";
+import TextIcon from "@/components/TextIcon";
 
 interface ProfileCardProps {
   name: string;
@@ -34,20 +35,17 @@ function ProfileCard({
       </div>
       <p>{bio}</p>
       <div className="flex gap-2 text-text/70">
-        <div className="flex gap-2  items-center" title="Seguidores">
-          <PeopleIcon />
-          <span>{followers}</span>
-        </div>
-        <div className="flex gap-2  items-center" title="Seguindo">
-          <PeopleIcon />
-          <span>{following}</span>
-        </div>
+        <TextIcon icon={<PeopleIcon />} title="Seguidores">
+          {followers}
+        </TextIcon>
+        <TextIcon icon={<PeopleIcon />} title="Seguindo">
+          {following}
+        </TextIcon>
       </div>
       {email && (
-        <div className="flex gap-2  items-center text-text/70" title="E-mail">
-          <AtIcon />
-          <span>{email}</span>
-        </div>
+        <TextIcon icon={<AtIcon />} title="E-mail">
+          {email}
+        </TextIcon>
       )}
     </aside>
   );

@@ -1,10 +1,10 @@
 import FallbackLoader from "@/components/FallbackLoader";
-
 import { useGetRepositories } from "@/graphql/profile/hooks";
 import type { RepositoryOrderBy } from "@/graphql/profile/types";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import OrderBy from "./OrderBy";
 import RepositoryCard from "./RepositoryCard";
+import { repositoryAdapter } from "@/graphql/profile/adapters";
 
 const repositoryObj: Record<
   string,
@@ -38,6 +38,13 @@ function RepositoryList() {
     setOrderBy(value);
   };
 
+  const repositoryList = useMemo(() => {
+    if (data) {
+      return repositoryAdapter(data);
+    }
+    return [];
+  }, [data]);
+
   return (
     <div className="flex flex-col gap-2 py-4">
       <div className="self-end shrink-0">
@@ -51,25 +58,16 @@ function RepositoryList() {
         {loading ? (
           <FallbackLoader />
         ) : (
-          data?.user.repositories.nodes.map(
-            ({
-              id,
-              name,
-              updatedAt,
-              description,
-              languages,
-              stargazerCount,
-            }) => (
-              <RepositoryCard
-                key={id}
-                description={description}
-                name={name}
-                stargazerCount={stargazerCount}
-                updatedAt={updatedAt}
-                languages={languages.nodes[0]}
-              />
-            )
-          )
+          repositoryList.map((repository) => (
+            <RepositoryCard
+              key={repository.id}
+              description={repository.description ?? ""}
+              name={repository.name}
+              stargazerCount={repository.stargazerCount}
+              updatedAt={repository.updatedAt}
+              languages={repository.languages}
+            />
+          ))
         )}
       </div>
     </div>

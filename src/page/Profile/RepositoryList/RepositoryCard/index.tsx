@@ -4,7 +4,6 @@ import LanguageCircle from "@/components/LanguageCircle";
 import TextIcon from "@/components/TextIcon";
 
 import Card from "@/components/UI/Card";
-import { formatDate } from "@/utils";
 import { Link } from "react-router";
 
 interface RepositoryCardProps {
@@ -30,7 +29,7 @@ function RepositoryCard({
       <Link to={`repository/${name}`} className="p-4 flex flex-col gap-2">
         <div className="flex justify-between">
           <h4 className="font-bold text-primary">{name}</h4>
-          <span className="text-text/70">{formatDate(updatedAt)}</span>
+          <span className="text-text/70">{updatedAt}</span>
         </div>
         {description && <p>{description}</p>}
         <div className="flex flex-row gap-4">

@@ -6,6 +6,7 @@ export const SEARCH_USERS = gql`
       edges {
         node {
           ... on User {
+            id
             login
             name
             bio

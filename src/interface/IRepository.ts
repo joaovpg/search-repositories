@@ -1,4 +1,4 @@
-export interface IRepository {
+export interface IRepositoryDetails {
   id: number;
   node_id: string;
   name: string;
@@ -103,4 +103,17 @@ interface Owner {
   type: string;
   user_view_type: string;
   site_admin: boolean;
+}
+
+export interface IRepository {
+  id: string;
+  name: string;
+  description?: string;
+  url: string;
+  updatedAt: string;
+  stargazerCount: number;
+  languages: {
+    name: string;
+    color: string;
+  };
 }
