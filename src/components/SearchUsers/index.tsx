@@ -82,7 +82,12 @@ function SearchUsers() {
                   key={item}
                   className="text-text/60 hover:bg-text/30 cursor-pointer w-full p-4 rounded-lg"
                 >
-                  <button onClick={() => navigate(`/search?q=${item}`)}>
+                  <button
+                    type="button"
+                    title={`Pesquisar por ${item}`}
+                    className="w-full h-full text-start cursor-pointer"
+                    onClick={() => navigate(`/search?q=${item}`)}
+                  >
                     {item}
                   </button>
                 </li>
