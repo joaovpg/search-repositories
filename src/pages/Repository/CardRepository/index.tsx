@@ -28,7 +28,9 @@ function CardRepository({
       <div className="p-4 flex flex-col gap-4">
         <div>
           <h1 className="text-2xl font-bold text-primary hover:decoration-2 hover:underline">
-            <a href={repositoryUrl}>{name}</a>
+            <a href={repositoryUrl} className="break-all">
+              {name}
+            </a>
           </h1>
           <div className="flex flex-row items-center gap-3 text-text/70">
             <span>atualizado em {formatDate(updatedAt)}</span>
