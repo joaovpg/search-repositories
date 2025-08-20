@@ -14,15 +14,15 @@ import type { ILanguage } from "@/interface/ILanguage";
 import Markdown from "@/components/Markdown";
 import FallbackLoader from "@/components/FallbackLoader";
 import { formatDate } from "@/utils";
-import { useAppParams } from "@/hooks/useAppParams";
 import NotFound from "../NotFound";
+import { useParams } from "react-router";
 
 function Repository() {
   const [repository, setRepository] = useState<IRepositoryDetails>();
   const [languages, setLanguages] = useState<ILanguage>();
   const [markdown, setMarkdown] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const params = useAppParams();
+  const params = useParams();
 
   const repositoryLanguages = useMemo(() => {
     if (!languages) return [];

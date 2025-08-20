@@ -3,13 +3,13 @@ import { useGetUser } from "@/graphql/profile/hooks";
 import { userVar } from "@/graphql/profile/state";
 import FallbackLoader from "@/components/FallbackLoader";
 import RepositoryList from "./RepositoryList";
-import { useAppParams } from "@/hooks/useAppParams";
 import ProfileCard from "./ProfileCard";
 import NotFound from "../NotFound";
 import { userDetailsAdapter } from "@/graphql/profile/adapters";
+import { useParams } from "react-router";
 
 function Profile() {
-  const { username } = useAppParams();
+  const { username } = useParams();
   const { data, loading, error } = useGetUser();
 
   const userDetails = useMemo(() => {
